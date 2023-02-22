@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::post('/search', [App\Http\Controllers\HomeController::class, 'index'])->name('search');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/index', [App\Http\Controllers\CvController::class, 'index'])->name('index');
@@ -25,7 +26,7 @@ Route::get('/create', [App\Http\Controllers\CvController::class, 'create'])->nam
 Route::post('/store', [App\Http\Controllers\CvController::class, 'store'])->name('store');
 Route::post('/destroy', [App\Http\Controllers\CvController::class, 'destroy'])->name('destroy');
 Route::get('/edit/{id}', [App\Http\Controllers\CvController::class, 'edit'])->name('edit');
-Route::get('/show/{id}', [App\Http\Controllers\CvController::class, 'show'])->name('show');
+Route::get('/show', [App\Http\Controllers\CvController::class, 'show'])->name('show');
 Route::post('/update', [App\Http\Controllers\CvController::class, 'update'])->name('update');
 Route::get('/role/{id}', [App\Http\Controllers\UserController::class, 'role'])->name('role');
 

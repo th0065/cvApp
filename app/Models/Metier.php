@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Cvs;
 use App\Models\User;
+use App\Models\Emplois;
 
 class Metier extends Model
 {
@@ -25,6 +26,11 @@ class Metier extends Model
     public function users() 
     { 
         return $this->hasMany(User::class); 
+        
+    }
+    public function emploi() 
+    { 
+        return $this->hasMany(Emplois::class); 
         
     }
 }

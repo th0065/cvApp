@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->text('details');
+            $table->string('lieu');
+            $table->string('logo')->nullable();
             $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('metier_id')->references('id')->on('metiers');
             $table->timestamps();
         });
     }

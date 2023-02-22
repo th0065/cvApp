@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\RoleUser;
 use App\Models\Emplois;
 use App\Models\Cvs;
+use App\Models\Metier;
+
 
 use Illuminate\Support\Facades\Auth;
 
@@ -26,12 +28,26 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->search) {
+            $emplois=Emplois::where('nom',$request->search)->get();
+        }
+        if ($request->category) {
+           
+                $emplois=Emplois::where('metier_id',$request->category)->get();
+            
+           
+        }
+        
+        if ($request->category==null && $request->search==null) {
+            $emplois=Emplois::all();
+        }
         $role=RoleUser::where('user_id', Auth::user()->id)->first();
         $emploi=Emplois::where('user_id', Auth::user()->id)->get();
-        $emplois=Emplois::all();
+        
         $cvs=Cvs::where('user_id', Auth::user()->id)->first();
-        return view('home' ,compact('role','emploi','emplois','cvs'));
+        $metier=Metier::all();
+        return view('home' ,compact('role','emploi','emplois','cvs','metier'));
     }
 }

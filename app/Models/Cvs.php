@@ -15,7 +15,11 @@ class Cvs extends Model
     protected $fillable = [
         'user_id',
         'metier_id',
-        'fileName',
+        'age',
+        'adresse',
+        'telephone',
+        'niveau',
+        'experience',
     ];
 
 

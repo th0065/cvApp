@@ -50,22 +50,27 @@ class CvController extends Controller
         $request->validate([
             'metier_id' => 'required',
             'user_id' => 'required',
-            'fileName' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'age' => 'required',
+            'telephone' => 'required',
+            'adresse' => 'required',
+            'niveau' => 'required',
+            'experience' => 'required',
+           
         ]);
 
         $input = $request->all();
 
-        if ($fileName = $request->file('fileName')) {
+       /* if ($fileName = $request->file('fileName')) {
             $destinationPath = 'images/';
             $profileImage = date('YmdHis') . "." . $fileName->getClientOriginalExtension();
             $fileName->move($destinationPath, $profileImage);
             $input['fileName'] = "$profileImage";
-        }
+        }*/
 
-        Cvs::create($input);
+      $cvs= Cvs::create($input);
 
-        return redirect()->route('index')
-        ->with('success','cv created successfully.');
+        return redirect()->route('show')
+        ->with('cvs',$cvs);
 
     }
 
@@ -75,9 +80,14 @@ class CvController extends Controller
     public function show( Request $request)
     {
 
-        
-        $cvs  = Cvs::where('user_id',$request->id)
+        if ($request->id) {
+            $cvs  = Cvs::where('user_id',$request->id)
         ->first();
+        }else{
+            $cvs  = Cvs::where('user_id',Auth::user()->id)
+            ->first();
+        }
+       
        if ($cvs!=null) {
         return view('cv.show',compact('cvs'));
        }else {
@@ -102,21 +112,26 @@ class CvController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'fileName' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
+            'metier_id' => 'required',
+            'user_id' => 'required',
         ]);
 
         $input = $request->all();
 
-        $fileName = $request->file('fileName');
+       /* $fileName = $request->file('fileName');
             $destinationPath = 'images/';
             $profileImage = date('YmdHis') . "." . $fileName->getClientOriginalExtension();
             $fileName->move($destinationPath, $profileImage);
             $input['fileName'] = "$profileImage";
+            */
             $cvs=Cvs::find($request->id);
             $cvs->update($input);
+            if ($cvs->update($input)) {
+                $cvs=Cvs::find($request->id);
+            }
     
-            return redirect()->route('index')
-                            ->with('success','cv updated successfully');
+            return redirect()->route('show')
+                            ->with('cvs',$cvs);
     }
 
     /**
@@ -127,14 +142,8 @@ class CvController extends Controller
         if ($request->id) {
             $cv = Cvs::find($request->id); 
         $cv->delete();
-        return redirect()->route('index')
+        return redirect()->route('create')
         ->with('success','cv deleted successfully');
-        }else {
-           
-        
-            return redirect()->route('index')
-            ->with('success','cv not deleted ');
-            
         }
 
        

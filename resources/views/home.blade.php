@@ -3,9 +3,15 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-14">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">@if (isset($role))
+                    @if ( $role->role_id==1)Emplois issus
+                @endif
+                @if ( $role->role_id==2)Emplois disponibles
+                @endif
+                @endif
+                </div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -24,15 +30,25 @@
 <table class="table table-bordered">
     <tr>
         
-        <th>Nom</th>
-        <th>Details</th>
+<th>Logo</th>
+<th>Entreprise</th>
+<th>Nom </th>
+<th>Categorie</th>
+<th>Details</th>
+<th>Email</th>
+<th>Lieu</th>
         <th width="280px">Action</th>
     </tr>
     @foreach ($emploi as $emploi)
     <tr>
         
+        <td><img src="images/{{ $emploi->logo }}" height="80" width="80" alt="logo"></td>
+        <td>{{ $emploi->user->name }}</td>
         <td>{{ $emploi->nom }}</td>
+        <td>{{ $emploi->metier->nom }}</td>
         <td>{{ $emploi->details }}</td>
+        <td>{{ $emploi->user->email }}</td>
+        <td>{{ $emploi->lieu }}</td>
         <td>
            
             <form action="{{ route('destroy.emploi') }}" method="POST">
@@ -64,20 +80,66 @@
     <p>{{ $message }}</p>
 </div>
 @endif
-<table class="table table-bordered">
+<div style="display:inline-flex;">
+    <div class="m-2 ">
+        <form action="{{route('search')}}" method="post">
+            @csrf
+            
+                <div class="form-group "> 
+                    <select class="form-select" onchange="this.form.submit()" name="category">
+                        <option value="" >Selectionner Catégorie</option>
+                        <option value="" >Tous</option>
+                        @foreach ($metier as $met)
+                        <option value="{{ $met->id }}">{{ $met->nom }}</option>
+                        @endforeach
+                       
+                    </select>    
+                    
+               </div>
+           
+        
+        </form>
+        </div>
+
+    <div class="m-2 ml-4" style="">
+<form action="{{route('search')}}" method="post" >
+    @csrf
+        <div class="form-group "  >
+          <input class="form-control " placeholder="nom" name="search" >
+            
+       </div>
+   
+</form>
+</div>
+
+</div>
+<table class="table table-bordered" id="tous" >
 <tr>
 
-<th>Nom</th>
-<th>Details</th>
-<th>Entreprise</th>
+    <th>Logo</th>
+    <th>Entreprise</th>
+    <th>Nom </th>
+    <th>Categorie</th>
+    <th>Details</th>
+    <th>Email</th>
+    <th>Lieu</th>
+
 <th width="280px">Action</th>
 </tr>
-@foreach ($emplois as $emploi)
+@foreach ($emplois  as $emploi)
 <tr>
 
-<td>{{ $emploi->nom }}</td>
-<td>{{ $emploi->details }}</td>
+<td><img src="/images/{{ $emploi->logo}}" height="80" width="80"></td>
 <td>{{ $emploi->user->name }}</td>
+<td>{{ $emploi->nom }}</td>
+<td>{{ $emploi->metier->nom }}</td>
+<td>{{ $emploi->details }}</td>
+<td>{{ $emploi->user->email }}</td>
+<td>{{ $emploi->lieu }}</td>
+
+
+
+
 <td>
 
    
@@ -88,17 +150,13 @@
         @if (isset($cvs))
         <input hidden value="{{$cvs->id}}" name="cvs_id">
         @endif
-        
-
        
-       
-      
         <button type="submit" class="btn btn-info">Postuler</button>
     </form>
 </td>
 </tr>
 @endforeach
-</table> </div>
+</table>
 @endif
 @else
 

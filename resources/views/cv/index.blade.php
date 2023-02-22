@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-14">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
@@ -28,17 +28,25 @@
                     <table class="table table-bordered">
                         <tr>
                             <th>No</th>
-                            <th>CV</th>
-                            <th>metier</th>
-                            <th>user</th>
+                            <th>Nom et Prénom</th>
+                            <th>Age</th>
+                            <th>Email</th>
+                            <th>Metier</th>
+                            <th>Experience Professionnelle</th>
+                            <th>Niveau d'étude</th>
+                            <th>Téléphone</th>
                             <th width="280px">Action</th>
                         </tr>
                         @foreach ($cvs as $cv)
                         <tr>
                             <td>{{ ++$i }}</td>
-                            <td ><img src="/images/{{$cv->fileName}}" height="100" width="100"></td>
+                            <td >{{ $cv->user->name }}</td>
+                            <td>{{ $cv->age }}</td>
+                            <td>{{ $cv->user->email }}</td>
                             <td>{{ $cv->metier->nom }}</td>
-                            <td>{{ $cv->user->name }}</td>
+                            <td>{{ $cv->experience }}</td>
+                            <td>{{ $cv->niveau }}</td>
+                            <td>{{ $cv->telephone }}</td>
                             <td>
                                
                                 <form action="{{ route('destroy') }}" method="POST">

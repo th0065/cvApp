@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('metier_id')->references('id')->on('metiers');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('fileName');
+            $table->string('adresse');
+            $table->string('telephone');
+            $table->string('niveau');
+            $table->integer('age');
+            $table->string('experience');
             $table->timestamps();
         });
     }

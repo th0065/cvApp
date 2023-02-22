@@ -49,12 +49,52 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>fileName:</strong>
+                                <strong>Age:</strong>
                                
-
-                                <input type="file" name="fileName" class="form-control" placeholder="image">
+                                <input type="number" name="age" class="form-control" >
                             </div>
                         </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <strong>Adresse:</strong>
+                               
+                                <input type="text" name="adresse" class="form-control" >
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <strong>Téléphone:</strong>
+                               
+                                <input type="text" name="telephone" class="form-control" placeholder="777678956">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <select class="form-select" aria-label="Default select example" name="niveau">
+                                    <option selected>Niveau d'étude</option>
+                                   
+                                    <option value="Bac">Bac</option>
+                                    <option value="Bac+1">Bac+1</option>
+                                    <option value="Bac+2">Bac+2</option>
+                                    <option value="Bac+3">Bac+3</option>
+                                    <option value="Bac+4">Bac+4</option>
+                                    <option value="Bac+5">Bac+5</option>
+                                  
+                                </select>    
+                                
+                           </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <strong>Experience:</strong>
+                               
+                                <input type="text" name="experience" class="form-control" placeholder="séparées avec des virgules">
+                            </div>
+                        </div>
+
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                         </div>

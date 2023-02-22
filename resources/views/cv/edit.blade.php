@@ -39,7 +39,7 @@
                           
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                               
+                                <strong>Metier:</strong>
                                 <select class="form-select" aria-label="Default select example" name="metier_id">
                                     <option selected value="{{ $cvs->metier->id }}" >{{$cvs->metier->nom}}</option>
                                     @foreach ($metier as $met)
@@ -48,11 +48,53 @@
                                   </select>                         
                                 </div>
                         </div>
+                       
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>fileName:</strong>
-                                <img src="/images/{{ $cvs->fileName }}" width="100" class="m-2">
-                                <input type="file" name="fileName" class="form-control" placeholder="image">
+                                <strong>Age:</strong>
+                               
+                                <input type="number" value="{{ $cvs->age }}" name="age" class="form-control" >
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <strong>Adresse:</strong>
+                               
+                                <input type="text" value="{{ $cvs->adresse }}" name="adresse" class="form-control" >
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <strong>Téléphone:</strong>
+                               
+                                <input type="text" name="telephone"  value="{{ $cvs->telephone }}" class="form-control" placeholder="777678956">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <strong>Niveau d'étude:</strong>
+                                <select class="form-select" aria-label="Default select example" name="niveau">
+                                    <option selected>{{ $cvs->niveau }}</option>
+                                   
+                                    <option value="Bac">Bac</option>
+                                    <option value="Bac+1">Bac+1</option>
+                                    <option value="Bac+2">Bac+2</option>
+                                    <option value="Bac+3">Bac+3</option>
+                                    <option value="Bac+4">Bac+4</option>
+                                    <option value="Bac+5">Bac+5</option>
+                                  
+                                </select>    
+                                
+                           </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <strong>Experience:</strong>
+                               
+                                <input type="text" name="experience" value="{{ $cvs->experience }}" class="form-control" placeholder="séparées avec des virgules">
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
